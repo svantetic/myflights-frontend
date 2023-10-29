@@ -11,8 +11,15 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@types/leaflet": "^1.9.7",
+    "@vueuse/core": "^10.5.0",
+    "@vueuse/nuxt": "^10.5.0",
     "nuxt": "^3.7.4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^2.9.0",
+    "leaflet": "^1.9.4"
   }
 }
