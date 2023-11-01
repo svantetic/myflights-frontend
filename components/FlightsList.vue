@@ -2,12 +2,12 @@
   <UCard>
     <template #header>
       <div class="flex justify-between items-baseline">
-        <span>{{ flights.length }} flights </span>
+        <span v-if="flights">{{ flights.length }} flights </span>
         <UButton class="m:hidden" @click="openMap" icon="i-heroicons-map">Open map</UButton>
       </div>
     </template>
 
-    <UTable :columns="columns" :rows="flights">
+    <UTable v-if="flights" :columns="columns" :rows="flights">
       <template #date-data="{ row }">
         <span>{{ formatFlightDate(row.date) }}</span>
       </template>
@@ -25,17 +25,27 @@
         <span>{{ row.to.city }}</span>
       </template>
     </UTable>
+
+    <div v-if="error">
+      {{  error }}
+    </div>
   </UCard>
 </template>
 
 <script setup lang="ts">
-const { data, error } = await useFetch<AirportsResponse>(
-  'http://localhost:3000/api/flights?limit=50'
-);
-const { flights, calculateDetails } = useFlights();
+import { getApiFlightsRoute } from '@/utils/api';
+const config = useRuntimeConfig();
 
-flights.value = data.value?.docs!;
-calculateDetails();
+const { data, error } = await useFetch<AirportsResponse>(
+  getApiFlightsRoute(config.public.backendHost, config.public.backendPort)
+);
+const { flights, calculateDetails, flightsDetails } = useFlights();
+
+
+if (data?.value?.docs) {
+  flights.value = data.value.docs;
+  calculateDetails();
+}
 
 const emit = defineEmits(['open-map']);
 
