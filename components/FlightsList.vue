@@ -33,9 +33,13 @@
 </template>
 
 <script setup lang="ts">
+import { getApiFlightsRoute } from '@/utils/api';
+const config = useRuntimeConfig();
+
 const { data, error } = await useFetch<AirportsResponse>(
-  'http://localhost:3000/api/flights?limit=50'
+  getApiFlightsRoute(config.public.backendHost, config.public.backendPort)
 );
+
 const { flights, calculateDetails, flightsDetails } = useFlights();
 
 if (data?.value?.docs) {

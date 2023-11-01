@@ -1,27 +1,15 @@
-ARG NODE_VERSION=18.14.2
+FROM node:16-alpine
 
-FROM node:${NODE_VERSION}-slim as base
-
-ARG PORT=3001
-
-ENV NODE_ENV=production
-
-WORKDIR /src
-
-FROM base as build
-
-COPY package.json package-lock.json .
-RUN npm install --production=false
-
+RUN mkdir -p /usr/src/nuxt-app
+WORKDIR /usr/src/nuxt-app
 COPY . .
 
+RUN npm ci && npm cache clean --force
 RUN npm run build
-RUN npm prune
 
-FROM base
+ENV NITRO_HOST=0.0.0.0
+ENV NITRO_PORT=3021
 
-ENV PORT=$PORT
+EXPOSE 3021 
 
-COPY --from=build /src/.output /src/.output
-
-CMD [ "node", ".output/server/index.mjs"]
+ENTRYPOINT ["node", ".output/server/index.mjs"]
