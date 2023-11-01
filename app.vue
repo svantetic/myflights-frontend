@@ -1,9 +1,8 @@
 <template>
   <div class="lg:container lg:mx-auto">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <FlightsList
         @open-map="openMap"
-        class="order-last lg:order-first"
       ></FlightsList>
       <template v-if="isSm">
         <UModal v-model="isModalOpen" fullscreen>
@@ -15,7 +14,7 @@
                 variant="ghost"
                 icon="i-heroicons-x-mark-20-solid"
                 class="-my-1"
-                @click="isModalOpen = false"
+                @click="closeMap()"
             /></template>
             <FlightsMap></FlightsMap>
           </UCard>
@@ -23,7 +22,7 @@
       </template>
       <template v-else>
         <FlightsMap
-          class="order-first lg:order-last hidden sm:block"
+          class="hidden md:block"
         ></FlightsMap>
       </template>
     </div>
@@ -40,4 +39,8 @@ const isModalOpen = ref(false);
 const openMap = () => {
   isModalOpen.value = true;
 };
+
+const closeMap = () => {
+  isModalOpen.value = false;
+}
 </script>

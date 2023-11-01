@@ -3,7 +3,7 @@
     <template #header>
       <div class="flex justify-between items-baseline">
         <span v-if="flights">{{ flights.length }} flights </span>
-        <UButton @click="openMap" icon="i-heroicons-map">Open map</UButton>
+        <UButton class="m:hidden" @click="openMap" icon="i-heroicons-map">Open map</UButton>
       </div>
     </template>
 
@@ -39,8 +39,8 @@ const config = useRuntimeConfig();
 const { data, error } = await useFetch<AirportsResponse>(
   getApiFlightsRoute(config.public.backendHost, config.public.backendPort)
 );
-
 const { flights, calculateDetails, flightsDetails } = useFlights();
+
 
 if (data?.value?.docs) {
   flights.value = data.value.docs;
