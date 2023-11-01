@@ -3,7 +3,7 @@
     <template #header>
       <div class="flex justify-between items-baseline">
         <span>{{ flights.length }} flights </span>
-        <UButton @click="openMap" icon="i-heroicons-map">Open map</UButton>
+        <UButton class="m:hidden" @click="openMap" icon="i-heroicons-map">Open map</UButton>
       </div>
     </template>
 
@@ -32,7 +32,7 @@
 const { data, error } = await useFetch<AirportsResponse>(
   'http://localhost:3000/api/flights?limit=50'
 );
-const { flights, calculateDetails, flightsDetails } = useFlights();
+const { flights, calculateDetails } = useFlights();
 
 flights.value = data.value?.docs!;
 calculateDetails();
