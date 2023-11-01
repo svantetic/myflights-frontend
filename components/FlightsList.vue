@@ -2,12 +2,12 @@
   <UCard>
     <template #header>
       <div class="flex justify-between items-baseline">
-        <span>{{ flights.length }} flights </span>
+        <span v-if="flights">{{ flights.length }} flights </span>
         <UButton @click="openMap" icon="i-heroicons-map">Open map</UButton>
       </div>
     </template>
 
-    <UTable :columns="columns" :rows="flights">
+    <UTable v-if="flights" :columns="columns" :rows="flights">
       <template #date-data="{ row }">
         <span>{{ formatFlightDate(row.date) }}</span>
       </template>
@@ -25,6 +25,10 @@
         <span>{{ row.to.city }}</span>
       </template>
     </UTable>
+
+    <div v-if="error">
+      {{  error }}
+    </div>
   </UCard>
 </template>
 
@@ -34,8 +38,10 @@ const { data, error } = await useFetch<AirportsResponse>(
 );
 const { flights, calculateDetails, flightsDetails } = useFlights();
 
-flights.value = data.value?.docs!;
-calculateDetails();
+if (data?.value?.docs) {
+  flights.value = data.value.docs;
+  calculateDetails();
+}
 
 const emit = defineEmits(['open-map']);
 
