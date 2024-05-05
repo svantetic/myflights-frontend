@@ -1,10 +1,10 @@
 <template>
-  <div class="lg:container lg:mx-auto">
+  <div class="lg:container lg:mx-auto mt-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <FlightsList
         @open-map="openMap"
       ></FlightsList>
-      <template v-if="isSm">
+      <template v-if="isBelowMd">
         <UModal v-model="isModalOpen" fullscreen>
           <UCard
           >
@@ -31,8 +31,9 @@
 
 <script setup lang="ts">
 import { breakpointsTailwind } from '@vueuse/core';
+
 const breakpoints = useBreakpoints(breakpointsTailwind);
-const isSm = breakpoints.smaller('sm');
+const isBelowMd = breakpoints.smaller('md');
 
 const isModalOpen = ref(false);
 

@@ -1,9 +1,7 @@
 export default defineNuxtConfig({
   runtimeConfig: {
-    public: {
-      backendHost: process.env.NUXT_PUBLIC_BACKEND_HOST || 'localhost',
-      backendPort: process.env.NUXT_PUBLIC_BACKEND_PORT || '3020'
-    },
+    backendHost: process.env.NUXT_PUBLIC_BACKEND_HOST || 'localhost',
+    backendPort: process.env.NUXT_PUBLIC_BACKEND_PORT || '3020'
   },
   devtools: { enabled: true },
   devServer: {
