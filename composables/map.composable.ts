@@ -1,7 +1,7 @@
-import { type Ref } from "vue";
-import L, { LatLngTuple, Map, Polyline } from "leaflet";
+import { type Ref } from 'vue';
+import L, { LatLngTuple, Map, Polyline } from 'leaflet';
 
-import marker from "@/assets/icons/marker.png";
+import marker from '@/assets/icons/marker.png';
 
 const KATOWICE_LAT_LON: LatLngTuple = [50.270908, 19.039993];
 
@@ -44,22 +44,22 @@ export const useMap = (map: Ref<Map>) => {
 
     for (const trip of flights.value) {
       if (isNaN(trip.to?.lat)) {
-        console.error("Missing lat", trip.to);
+        console.error('Missing lat', trip.to);
         continue;
       }
 
       if (isNaN(trip.to?.lon)) {
-        console.error("Missing lon", trip.to);
+        console.error('Missing lon', trip.to);
         continue;
       }
 
       if (isNaN(trip.from?.lat)) {
-        console.error("Missing lat", trip.to);
+        console.error('Missing lat', trip.to);
         continue;
       }
 
       if (isNaN(trip.from?.lon)) {
-        console.error("Missing lat", trip.to);
+        console.error('Missing lat', trip.to);
         continue;
       }
       const fromLat = Number.parseFloat(trip.from?.lat!);
@@ -98,7 +98,7 @@ export const useMap = (map: Ref<Map>) => {
 
       line = new L.Polyline([pointFrom, pointTo], {
         fill: true,
-        color: "#9611c5",
+        color: '#9611c5',
         weight: 3,
         opacity: 1,
         renderer: lineRenderer,
@@ -111,13 +111,13 @@ export const useMap = (map: Ref<Map>) => {
   };
 
   const initializeMap = (map: Map) => {
-    map = L.map("map").setView([25, 0], 3);
+    map = L.map('map').setView([25, 0], 3);
 
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 40,
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      className: "map-tile",
+      className: 'map-tile',
     }).addTo(map);
 
     return map;

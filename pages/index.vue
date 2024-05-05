@@ -1,13 +1,10 @@
 <template>
   <div class="lg:container lg:mx-auto mt-4">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <FlightsList
-        @open-map="openMap"
-      ></FlightsList>
+      <FlightsList @open-map="openMap"></FlightsList>
       <template v-if="isBelowMd">
         <UModal v-model="isModalOpen" fullscreen>
-          <UCard
-          >
+          <UCard>
             <template #header>
               <UButton
                 color="gray"
@@ -21,9 +18,7 @@
         </UModal>
       </template>
       <template v-else>
-        <FlightsMap
-          class="hidden md:block"
-        ></FlightsMap>
+        <FlightsMap class="hidden md:block"></FlightsMap>
       </template>
     </div>
   </div>
@@ -43,11 +38,11 @@ const openMap = () => {
 
 const closeMap = () => {
   isModalOpen.value = false;
-}
+};
 
 useSeoMeta({
   title: 'MyFlights',
   description: 'See your historic flights',
-  author: 'svantetic'
-})
+  author: 'svantetic',
+});
 </script>

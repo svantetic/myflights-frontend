@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { computed, toRefs, PropType } from "vue";
-import { type Flight } from '~/types/flight.types';
+import { type Flight } from "~/types/flight.types";
 
 const props = defineProps({
   flights: {

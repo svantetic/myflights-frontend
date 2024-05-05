@@ -1,10 +1,11 @@
-import { AirportsResponse } from "~/types/airport.types";
+import { AirportsResponse } from '~/types/airport.types';
+
 export default defineEventHandler(async (event) => {
   const { backendHost, backendPort } = useRuntimeConfig(event);
 
   try {
     const data = (await $fetch(
-      getApiFlightsRoute(backendHost, backendPort),
+      getApiFlightsRoute(backendHost, backendPort)
     )) as AirportsResponse;
 
     return data;

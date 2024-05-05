@@ -1,12 +1,11 @@
-
 export type Airport = {
   name: string;
   icao: string;
 };
 
 export type AirportDocs = Array<{
-    from: Airport;
-    to: Airport;
+  from: Airport;
+  to: Airport;
 }>;
 
 export type AirportsResponse = {
@@ -19,11 +18,11 @@ export type AirportsResponse = {
 export type ExtendedAirport = Airport & {
   lat: number;
   lon: number;
-}
+};
 
 export type AirportFromToNumber = {
   from: number;
   to: number;
-}
+};
 
 export type AirportTrafficDetails = Record<string, AirportFromToNumber>;

@@ -1,8 +1,8 @@
-import { AirportTrafficDetails } from "~/types/airport.types";
+import { AirportTrafficDetails } from '~/types/airport.types';
 
 export const useFlights = () => {
-  const flights = useState("flights") as Ref<Flight[]>;
-  const flightsDetails = useState<AirportTrafficDetails>("flightsDetails");
+  const flights = useState('flights') as Ref<Flight[]>;
+  const flightsDetails = useState<AirportTrafficDetails>('flightsDetails');
 
   const extendWithId = (flights: Flight[]) => {
     return flights.map((flight: Flight, index: number) => {
@@ -16,7 +16,7 @@ export const useFlights = () => {
     const uniqueAirports = new Set<string>(
       flights.value.flatMap((f) => {
         return [f.to.icao, f.from.icao];
-      }),
+      })
     );
 
     const airportsFlightsCount = {};
