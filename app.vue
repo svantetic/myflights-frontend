@@ -44,4 +44,10 @@ const openMap = () => {
 const closeMap = () => {
   isModalOpen.value = false;
 }
+
+useSeoMeta({
+  title: 'MyFlights',
+  description: 'See your historic flights',
+  author: 'svantetic'
+})
 </script>
